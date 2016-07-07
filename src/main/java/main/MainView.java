@@ -38,6 +38,7 @@ public class MainView {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            frame.setSize(new Dimension(800, 600));
             frame.setPreferredSize(new Dimension(800, 600));
             frame.add(JukeBoxPanel.getJukeBoxPanel().getMainPanel());
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
