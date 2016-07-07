@@ -1,6 +1,9 @@
-package view;
+package main;
+
+import view.JukeBoxPanel;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by php on 05/07/16.
@@ -28,6 +31,8 @@ public class MainView {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             frame.setTitle("JukeBox");
+            frame.setPreferredSize(new Dimension(800, 600));
+            frame.add(JukeBoxPanel.getJukeBoxPanel().getMainPanel());
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             frame.setVisible(true);
             frame.pack();
