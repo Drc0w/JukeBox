@@ -11,11 +11,23 @@ import java.io.IOException;
 public class IconUtils {
     public static ImageIcon getImage(String imageName, int width, int height) {
         try {
-            BufferedImage bufferedImage = ImageIO.read(IconUtils.class.getClass().getResourceAsStream("/images/" + imageName));
-            return new ImageIcon(bufferedImage.getScaledInstance(width, height, BufferedImage.SCALE_REPLICATE));
+            return new ImageIcon(getBufferedImage(imageName).getScaledInstance(width, height, BufferedImage.SCALE_REPLICATE));
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static ImageIcon getImage(String imageName) {
+        try {
+            return new ImageIcon(getBufferedImage(imageName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static BufferedImage getBufferedImage(String imageName) throws IOException {
+        return ImageIO.read(IconUtils.class.getClass().getResourceAsStream("/images/" + imageName));
     }
 }
