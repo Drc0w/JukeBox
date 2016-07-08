@@ -15,6 +15,7 @@ public class MusicPlayer {
      * This object is used in order to lock access to other functions when modifying the current state
      */
     private final Object lock = new Object();
+
     /**
      * Current state of the player
      */
@@ -127,11 +128,8 @@ public class MusicPlayer {
     private void playInternal() {
         while (!this.isStopped()) {
             try {
-                if (!this.player.play(1)) {
-                    System.out.println("play(1) is false");
+                if (!this.player.play(1))
                     break;
-                }
-                System.out.println("play(1) is true");
             } catch (JavaLayerException e) {
                 e.printStackTrace();
                 break;
