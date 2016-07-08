@@ -45,9 +45,9 @@ public class MusicPlayerService {
      * @throws FileNotFoundException Can throw this exception if a bad file is given
      * @throws JavaLayerException    Can throw this exception when error occurs while initializing the player
      */
-    public void initializeSong(String filename) throws FileNotFoundException, JavaLayerException {
+    public boolean initializeSong(String filename) throws FileNotFoundException, JavaLayerException {
         File file = new File(filename);
-        initializeSong(file);
+        return initializeSong(file);
     }
 
     /**
@@ -57,10 +57,14 @@ public class MusicPlayerService {
      * @throws FileNotFoundException Can throw this exception if a bad file is given
      * @throws JavaLayerException    Can throw this exception when error occurs while initializing the player
      */
-    public void initializeSong(File file) throws FileNotFoundException, JavaLayerException {
-        FileInputStream fileInputStream = new FileInputStream(file);
-        BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
-        this.player = new MusicPlayer(bufferedInputStream);
+    public boolean initializeSong(File file) throws FileNotFoundException, JavaLayerException {
+        if (this.player == null) {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+            this.player = new MusicPlayer(bufferedInputStream);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -70,9 +74,12 @@ public class MusicPlayerService {
      * @throws FileNotFoundException Can throw this exception if a bad file is given
      * @throws JavaLayerException    Can throw this exception while initializing the player
      */
-    public void playSong(String filename) throws FileNotFoundException, JavaLayerException {
-        initializeSong(filename);
-        this.play();
+    public boolean playSong(String filename) throws FileNotFoundException, JavaLayerException {
+        if (initializeSong(filename)) {
+            this.play();
+            return true;
+        }
+        return false;
     }
 
     /**
