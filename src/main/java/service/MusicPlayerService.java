@@ -111,6 +111,8 @@ public class MusicPlayerService {
         if (this.player != null && !this.player.isStopped()) {
             this.player.stop();
             this.player = null;
+        } else if (this.player != null) {
+            this.player = null;
         }
     }
 
