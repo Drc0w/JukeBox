@@ -1,5 +1,7 @@
 package controller;
 
+import service.MusicPlayerService;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,6 +11,6 @@ import java.awt.event.ActionListener;
 public class StopController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-
+        MusicPlayerService.getInstance().stop();
     }
 }
