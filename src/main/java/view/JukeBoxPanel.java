@@ -24,7 +24,7 @@ public class JukeBoxPanel implements Observer {
         return jukeBoxPanel;
     }
 
-    private JToolBar makeBottomPanel() {
+    private JComponent makeBottomPanel() {
         JToolBar bottomPanel = new JToolBar();
 
         JButton playButton = new JButton();
@@ -70,11 +70,29 @@ public class JukeBoxPanel implements Observer {
         return bottomPanel;
     }
 
+    private JComponent makeTopPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+
+        JMenuBar menuBar = new JMenuBar();
+        panel.add(menuBar);
+
+        JMenu file = new JMenu("File");
+        menuBar.add(file);
+
+        JMenuItem openFile = new JMenuItem("Open file");
+        openFile.addActionListener(new OpenFileController());
+        file.add(openFile);
+
+        return panel;
+    }
+
     private JPanel makePanel() {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
         mainPanel.add(makeBottomPanel(), BorderLayout.SOUTH);
+        mainPanel.add(makeTopPanel(), BorderLayout.NORTH);
 
         mainPanel.setPreferredSize(new Dimension(800, 600));
         return mainPanel;
