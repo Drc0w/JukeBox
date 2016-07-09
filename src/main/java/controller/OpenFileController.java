@@ -3,6 +3,7 @@ package controller;
 import main.MainView;
 import model.PlayLists;
 import utils.Song;
+import view.TabsView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -18,6 +19,10 @@ public class OpenFileController implements ActionListener {
         dialog.showOpenDialog(MainView.getFrame());
 
         if (dialog.getSelectedFile() != null) {
+            if (TabsView.getTabsView().getTabCount() == 0) {
+                AddTabController tabController = new AddTabController();
+                tabController.actionPerformed(actionEvent);
+            }
             Song song = new Song(dialog.getSelectedFile());
             PlayLists.getInstance().getCurrentPlayList().addSong(song);
         }
