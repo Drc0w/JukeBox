@@ -75,6 +75,7 @@ public class MusicPlayerService {
      * @throws JavaLayerException    Can throw this exception while initializing the player
      */
     public boolean playSong(String filename) throws FileNotFoundException, JavaLayerException {
+        this.stop();
         if (initializeSong(filename)) {
             this.play();
             return true;
