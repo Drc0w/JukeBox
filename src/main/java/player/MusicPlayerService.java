@@ -22,10 +22,15 @@ public class MusicPlayerService {
     private MusicPlayer player;
 
     /**
+     * The class that will be notified when the player stops playing
+     */
+    private MusicPlayerHandler playerHandler;
+
+    /**
      * Default constructor of the class
      */
     private MusicPlayerService() {
-
+        this.playerHandler = new MusicPlayerHandler();
     }
 
     /**
@@ -61,6 +66,7 @@ public class MusicPlayerService {
             FileInputStream fileInputStream = new FileInputStream(file);
             BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
             this.player = new MusicPlayer(bufferedInputStream);
+            this.player.addObserver(this.playerHandler);
             return true;
         }
         return false;
