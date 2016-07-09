@@ -14,7 +14,6 @@ public class PlayLists extends Model {
 
     private PlayLists() {
         this.playLists = new ArrayList<>();
-        this.playLists.add(new PlayList("P1"));
         this.currentPlaylist = 0;
     }
 
@@ -23,7 +22,11 @@ public class PlayLists extends Model {
     }
 
     public PlayList getCurrentPlayList() {
-        return this.playLists.get(this.currentPlaylist);
+        if (this.currentPlaylist >= 0 && this.currentPlaylist < this.playLists.size()) {
+            return this.playLists.get(this.currentPlaylist);
+        } else {
+            return null;
+        }
     }
 
     public void removePlayList(int position) {
