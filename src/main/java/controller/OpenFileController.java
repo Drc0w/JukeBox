@@ -1,13 +1,13 @@
 package controller;
 
-import javazoom.jl.decoder.JavaLayerException;
 import main.MainView;
-import service.MusicPlayerService;
+import model.PlayList;
+import model.PlayLists;
+import model.Song;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 
 /**
  * Created by php on 08/07/16.
@@ -19,11 +19,10 @@ public class OpenFileController implements ActionListener {
         dialog.showOpenDialog(MainView.getFrame());
 
         if (dialog.getSelectedFile() != null) {
-            try {
-                MusicPlayerService.getInstance().initializeSong(dialog.getSelectedFile());
-            } catch (FileNotFoundException | JavaLayerException e) {
-                e.printStackTrace();
-            }
+            Song song = new Song(dialog.getSelectedFile());
+            PlayList playList = new PlayList("P1");
+            playList.addSong(song);
+            PlayLists.getInstance().addPlayList(playList);
         }
     }
 }
