@@ -16,15 +16,15 @@ public class TabView extends JPanel implements Observer {
 
     private PlayListView listView;
 
-    public TabView() {
+    public TabView(ImageView imageView, PlayListView playListView) {
         super();
         this.setLayout(new BorderLayout());
 
         this.splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
         this.splitPane.setOneTouchExpandable(true);
 
-        this.imageView = new ImageView();
-        this.listView = new PlayListView();
+        this.imageView = imageView;
+        this.listView = playListView;
 
         this.splitPane.setLeftComponent(this.imageView);
         this.splitPane.setRightComponent(this.listView);
