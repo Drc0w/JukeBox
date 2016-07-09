@@ -1,13 +1,11 @@
 package utils;
 
-import model.Model;
-
 import java.io.File;
 
 /**
  * Created by php on 09/07/16.
  */
-public class Song extends Model {
+public class Song {
     /**
      * The path to the file
      */
@@ -50,15 +48,5 @@ public class Song extends Model {
      */
     public File getFile() {
         return this.file;
-    }
-
-    /**
-     * This function will update the model and notify the observers
-     *
-     * @param o Object used in order to update the model
-     */
-    @Override
-    public void performAction(Object o) {
-
     }
 }
