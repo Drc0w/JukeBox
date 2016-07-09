@@ -1,7 +1,6 @@
-package service;
+package player;
 
 import javazoom.jl.decoder.JavaLayerException;
-import player.MusicPlayer;
 
 import java.io.BufferedInputStream;
 import java.io.File;

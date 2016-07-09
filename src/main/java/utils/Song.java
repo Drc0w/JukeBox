@@ -1,4 +1,6 @@
-package model;
+package utils;
+
+import model.Model;
 
 import java.io.File;
 
