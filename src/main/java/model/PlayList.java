@@ -31,9 +31,8 @@ public class PlayList extends Model {
     }
 
     public void playNext() {
-        this.currentSong += 1;
-        MusicPlayerService.getInstance().stop();
-        if (this.currentSong >= 0 && this.currentSong < this.songs.size()) {
+        if (this.currentSong >= 0 && this.currentSong < this.songs.size() - 1) {
+            this.currentSong += 1;
             try {
                 MusicPlayerService.getInstance().playSong(this.songs.get(this.currentSong).getPath());
             } catch (FileNotFoundException | JavaLayerException e) {
@@ -43,14 +42,15 @@ public class PlayList extends Model {
     }
 
     public void playPrevious() {
-        this.currentSong -= 1;
-        MusicPlayerService.getInstance().stop();
         if (this.currentSong >= 0 && this.currentSong < this.songs.size()) {
+            this.currentSong = this.currentSong > 0 ? this.currentSong - 1 : 0;
             try {
                 MusicPlayerService.getInstance().playSong(this.songs.get(this.currentSong).getPath());
             } catch (FileNotFoundException | JavaLayerException e) {
                 e.printStackTrace();
             }
+        } else if (this.currentSong < 0) {
+            this.currentSong = 0;
         }
     }
 
@@ -66,10 +66,13 @@ public class PlayList extends Model {
 
     public void addSong(Song song) {
         this.songs.add(song);
+        this.setChanged();
+        this.notifyObservers(this.songs);
     }
 
     @Override
     public void performAction(Object o) {
-        notifyObservers();
+        setChanged();
+        notifyObservers(songs);
     }
 }
