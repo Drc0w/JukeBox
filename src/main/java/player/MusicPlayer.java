@@ -124,7 +124,8 @@ public class MusicPlayer extends Observable {
         } catch (Exception ignored) {
 
         }
-        notifyObservers(this.currentStates);
+        this.setChanged();
+        this.notifyObservers(this.currentStates);
     }
 
     private void playInternal() {
