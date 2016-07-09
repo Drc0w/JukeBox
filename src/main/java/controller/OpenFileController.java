@@ -20,9 +20,7 @@ public class OpenFileController implements ActionListener {
 
         if (dialog.getSelectedFile() != null) {
             Song song = new Song(dialog.getSelectedFile());
-            PlayList playList = new PlayList("P1");
-            playList.addSong(song);
-            PlayLists.getInstance().addPlayList(playList);
+            PlayLists.getInstance().getCurrentPlayList().addSong(song);
         }
     }
 }
