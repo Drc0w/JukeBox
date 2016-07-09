@@ -5,11 +5,12 @@ import javazoom.jl.player.AudioDevice;
 import javazoom.jl.player.Player;
 
 import java.io.InputStream;
+import java.util.Observable;
 
 /**
  * Created by php on 07/07/16.
  */
-public class MusicPlayer {
+public class MusicPlayer extends Observable {
     /**
      * Object used as a lock
      * This object is used in order to lock access to other functions when modifying the current state
@@ -112,6 +113,7 @@ public class MusicPlayer {
             this.currentStates = States.STOPPED;
             this.lock.notifyAll();
         }
+        notifyObservers(this.currentStates);
     }
 
     public void close() {
@@ -123,6 +125,7 @@ public class MusicPlayer {
         } catch (Exception ignored) {
 
         }
+        notifyObservers(this.currentStates);
     }
 
     private void playInternal() {
@@ -151,7 +154,7 @@ public class MusicPlayer {
     /**
      * This enum is used in order to set the current state of the player
      */
-    private enum States {
+    protected enum States {
         NOT_STARTED,
         RUNNING,
         PAUSED,
