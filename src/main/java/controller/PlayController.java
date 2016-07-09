@@ -1,5 +1,6 @@
 package controller;
 
+import model.PlayLists;
 import service.MusicPlayerService;
 
 import java.awt.event.ActionEvent;
@@ -11,7 +12,9 @@ import java.awt.event.ActionListener;
 public class PlayController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        if (!MusicPlayerService.getInstance().isRunning()) {
+        if (!MusicPlayerService.getInstance().isStarted()) {
+            PlayLists.getInstance().getCurrentPlayList().launchPlayList();
+        } else if (!MusicPlayerService.getInstance().isRunning()) {
             MusicPlayerService.getInstance().play();
         } else {
             MusicPlayerService.getInstance().pause();
