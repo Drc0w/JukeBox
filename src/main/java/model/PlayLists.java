@@ -36,6 +36,6 @@ public class PlayLists extends Model {
 
     @Override
     public void performAction(Object o) {
-
+        notifyObservers();
     }
 }

@@ -1,7 +1,8 @@
 package model;
 
 import javazoom.jl.decoder.JavaLayerException;
-import service.MusicPlayerService;
+import player.MusicPlayerService;
+import utils.Song;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
