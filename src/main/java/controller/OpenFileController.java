@@ -1,9 +1,8 @@
 package controller;
 
 import main.MainView;
-import model.PlayList;
 import model.PlayLists;
-import model.Song;
+import utils.Song;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
