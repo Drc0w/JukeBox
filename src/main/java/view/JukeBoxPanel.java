@@ -25,7 +25,8 @@ public class JukeBoxPanel implements Observer {
     }
 
     private JComponent makeBottomPanel() {
-        JToolBar bottomPanel = new JToolBar();
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
 
         JButton playButton = new JButton();
         playButton.addActionListener(new PlayController());
@@ -93,6 +94,7 @@ public class JukeBoxPanel implements Observer {
 
         mainPanel.add(makeBottomPanel(), BorderLayout.SOUTH);
         mainPanel.add(makeTopPanel(), BorderLayout.NORTH);
+        mainPanel.add(TabsView.getTabsView(), BorderLayout.CENTER);
 
         mainPanel.setPreferredSize(new Dimension(800, 600));
         return mainPanel;
