@@ -113,7 +113,6 @@ public class MusicPlayer extends Observable {
             this.currentStates = States.STOPPED;
             this.lock.notifyAll();
         }
-        notifyObservers(this.currentStates);
     }
 
     public void close() {
