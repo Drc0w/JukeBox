@@ -5,11 +5,12 @@ import javazoom.jl.player.AudioDevice;
 import javazoom.jl.player.Player;
 
 import java.io.InputStream;
+import java.util.Observable;
 
 /**
  * Created by php on 07/07/16.
  */
-public class MusicPlayer {
+public class MusicPlayer extends Observable {
     /**
      * Object used as a lock
      * This object is used in order to lock access to other functions when modifying the current state
@@ -34,6 +35,13 @@ public class MusicPlayer {
         this.player = new Player(inputStream);
     }
 
+    /**
+     * Alternate constructor of the class
+     *
+     * @param inputStream The stream from which music is played
+     * @param audioDevice The AudioDevice that will be used by the player
+     * @throws JavaLayerException Can throw exception when initializing the player
+     */
     public MusicPlayer(InputStream inputStream, AudioDevice audioDevice) throws JavaLayerException {
         this.currentStates = States.NOT_STARTED;
         this.player = new Player(inputStream, audioDevice);
@@ -90,6 +98,9 @@ public class MusicPlayer {
         }
     }
 
+    /**
+     * This function pauses the current song
+     */
     public void pause() {
         synchronized (this.lock) {
             if (isRunning()) {
@@ -98,6 +109,9 @@ public class MusicPlayer {
         }
     }
 
+    /**
+     * This function resumes the current song
+     */
     public void resume() {
         synchronized (this.lock) {
             if (isPaused()) {
@@ -107,6 +121,9 @@ public class MusicPlayer {
         }
     }
 
+    /**
+     * This function stops the palyer
+     */
     public void stop() {
         synchronized (this.lock) {
             this.currentStates = States.STOPPED;
@@ -114,6 +131,9 @@ public class MusicPlayer {
         }
     }
 
+    /**
+     * This function closes the stream
+     */
     public void close() {
         synchronized (this.lock) {
             this.currentStates = States.STOPPED;
@@ -123,8 +143,13 @@ public class MusicPlayer {
         } catch (Exception ignored) {
 
         }
+        this.setChanged();
+        this.notifyObservers(this.currentStates);
     }
 
+    /**
+     * This function is used in order to paly music in a separate thread
+     */
     private void playInternal() {
         while (!this.isStopped()) {
             try {
@@ -151,7 +176,7 @@ public class MusicPlayer {
     /**
      * This enum is used in order to set the current state of the player
      */
-    private enum States {
+    protected enum States {
         NOT_STARTED,
         RUNNING,
         PAUSED,

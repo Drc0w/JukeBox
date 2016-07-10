@@ -1,6 +1,6 @@
 package controller;
 
-import service.MusicPlayerService;
+import player.MusicPlayerService;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

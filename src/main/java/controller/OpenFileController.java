@@ -1,13 +1,13 @@
 package controller;
 
-import javazoom.jl.decoder.JavaLayerException;
 import main.MainView;
-import service.MusicPlayerService;
+import model.PlayLists;
+import utils.Song;
+import view.TabsView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 
 /**
  * Created by php on 08/07/16.
@@ -19,11 +19,12 @@ public class OpenFileController implements ActionListener {
         dialog.showOpenDialog(MainView.getFrame());
 
         if (dialog.getSelectedFile() != null) {
-            try {
-                MusicPlayerService.getInstance().initializeSong(dialog.getSelectedFile());
-            } catch (FileNotFoundException | JavaLayerException e) {
-                e.printStackTrace();
+            if (TabsView.getTabsView().getTabCount() == 0) {
+                AddTabController tabController = new AddTabController();
+                tabController.actionPerformed(actionEvent);
             }
+            Song song = new Song(dialog.getSelectedFile());
+            PlayLists.getInstance().getCurrentPlayList().addSong(song);
         }
     }
 }
