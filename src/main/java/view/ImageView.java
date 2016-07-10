@@ -30,7 +30,7 @@ public class ImageView extends JPanel implements Observer {
     public ImageView() {
         super();
         try {
-            this.imagePanel = new ImagePanel(IconUtils.getBufferedImage("circle.bmp"));
+            this.imagePanel = new ImagePanel(IconUtils.getBufferedImage("icon.png"));
             this.imagePanel.setPreferredSize(new Dimension(this.imagePanel.getWidth(), this.imagePanel.getHeight()));
             this.scrollPane = new JScrollPane(this.imagePanel);
         } catch (IOException e) {
