@@ -24,7 +24,7 @@ public class OpenFileController implements ActionListener {
                 tabController.actionPerformed(actionEvent);
             }
             Song song = new Song(dialog.getSelectedFile());
-            PlayLists.getInstance().getCurrentPlayList().addSong(song);
+            PlayLists.getInstance().getPlayList(TabsView.getTabsView().getSelectedIndex()).addSong(song);
         }
     }
 }
