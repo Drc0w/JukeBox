@@ -18,7 +18,7 @@ public class PlayLists extends Model {
     private ArrayList<PlayList> playLists;
 
     /**
-     * The index of the current playlist
+     * The index of the current playlist playing
      */
     private int currentPlaylist;
 
@@ -27,7 +27,6 @@ public class PlayLists extends Model {
      */
     private PlayLists() {
         this.playLists = new ArrayList<>();
-        this.currentPlaylist = 0;
     }
 
     /**
@@ -43,6 +42,37 @@ public class PlayLists extends Model {
      * Access to the current playlist
      *
      * @return Returns the current playlist, null if empty
+     */
+    public PlayList getPlayList(int pos) {
+        if (pos >= 0 && pos < this.playLists.size()) {
+            return this.playLists.get(pos);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Accessor on the current playlist's index
+     *
+     * @return Returns the index of the current playlist
+     */
+    public int getCurrentIndex() {
+        return this.currentPlaylist;
+    }
+
+    /**
+     * Update the index of the current plyalist
+     *
+     * @param pos The new position
+     */
+    public void setCurrentPlaylist(int pos) {
+        this.currentPlaylist = pos;
+    }
+
+    /**
+     * Accessor on the current playlist
+     *
+     * @return Returns the current playlist
      */
     public PlayList getCurrentPlayList() {
         if (this.currentPlaylist >= 0 && this.currentPlaylist < this.playLists.size()) {
@@ -69,7 +99,6 @@ public class PlayLists extends Model {
     public void addPlayList(PlayList playList) {
         this.playLists.add(playList);
     }
-
 
     /**
      * Notifies observers after update
