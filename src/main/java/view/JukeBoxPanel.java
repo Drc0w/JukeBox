@@ -110,6 +110,17 @@ public class JukeBoxPanel implements Observer {
         openFile.addActionListener(new OpenFileController());
         file.add(openFile);
 
+        JMenu playlist = new JMenu("Playlist");
+        menuBar.add(playlist);
+
+        JMenuItem addPlayList = new JMenuItem("New playlist");
+        addPlayList.addActionListener(new AddTabController());
+        playlist.add(addPlayList);
+
+        JMenuItem removePlayList = new JMenuItem("Remove current playlist");
+        removePlayList.addActionListener(new DeleteTabController());
+        playlist.add(removePlayList);
+
         return panel;
     }
 
