@@ -1,6 +1,7 @@
 package controller;
 
 import model.PlayLists;
+import player.MusicPlayerService;
 import view.TabsView;
 
 import java.awt.event.ActionEvent;
@@ -14,6 +15,9 @@ public class DeleteTabController implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         if (TabsView.getTabsView().getTabCount() != 0) {
             int pos = TabsView.getTabsView().getSelectedIndex();
+            if (pos == PlayLists.getInstance().getCurrentIndex()) {
+                MusicPlayerService.getInstance().stop();
+            }
             TabsView.getTabsView().remove(pos);
             PlayLists.getInstance().removePlayList(pos);
         }
