@@ -35,6 +35,13 @@ public class MusicPlayer extends Observable {
         this.player = new Player(inputStream);
     }
 
+    /**
+     * Alternate constructor of the class
+     *
+     * @param inputStream The stream from which music is played
+     * @param audioDevice The AudioDevice that will be used by the player
+     * @throws JavaLayerException Can throw exception when initializing the player
+     */
     public MusicPlayer(InputStream inputStream, AudioDevice audioDevice) throws JavaLayerException {
         this.currentStates = States.NOT_STARTED;
         this.player = new Player(inputStream, audioDevice);
@@ -91,6 +98,9 @@ public class MusicPlayer extends Observable {
         }
     }
 
+    /**
+     * This function pauses the current song
+     */
     public void pause() {
         synchronized (this.lock) {
             if (isRunning()) {
@@ -99,6 +109,9 @@ public class MusicPlayer extends Observable {
         }
     }
 
+    /**
+     * This function resumes the current song
+     */
     public void resume() {
         synchronized (this.lock) {
             if (isPaused()) {
@@ -108,6 +121,9 @@ public class MusicPlayer extends Observable {
         }
     }
 
+    /**
+     * This function stops the palyer
+     */
     public void stop() {
         synchronized (this.lock) {
             this.currentStates = States.STOPPED;
@@ -115,6 +131,9 @@ public class MusicPlayer extends Observable {
         }
     }
 
+    /**
+     * This function closes the stream
+     */
     public void close() {
         synchronized (this.lock) {
             this.currentStates = States.STOPPED;
@@ -128,6 +147,9 @@ public class MusicPlayer extends Observable {
         this.notifyObservers(this.currentStates);
     }
 
+    /**
+     * This function is used in order to paly music in a separate thread
+     */
     private void playInternal() {
         while (!this.isStopped()) {
             try {

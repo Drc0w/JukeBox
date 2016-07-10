@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
  */
 public class MusicPlayerService {
     /**
-     * Singleton desing pattern implementation on the service
+     * Singleton design pattern implementation on the service
      */
     private static final MusicPlayerService MUSIC_PLAYER_SERVICE = new MusicPlayerService();
 

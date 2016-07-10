@@ -12,12 +12,25 @@ import java.util.Observer;
  * Created by php on 09/07/16.
  */
 public class PlayListView extends JPanel implements Observer {
+
+    /**
+     * The JList containing all the songs' name
+     */
     private JList<String> jList;
 
+    /**
+     * The DefaultListModel that is used in order to store the elements of the JList
+     */
     private DefaultListModel<String> listModel;
 
+    /**
+     * The JScrollPane that is used in order to scroll in the JList
+     */
     private JScrollPane scrollPane;
 
+    /**
+     * Default constructor of the class
+     */
     public PlayListView() {
         this.listModel = new DefaultListModel<>();
         this.setLayout(new BorderLayout());
@@ -31,6 +44,13 @@ public class PlayListView extends JPanel implements Observer {
         this.add(this.scrollPane, BorderLayout.CENTER);
     }
 
+
+    /**
+     * This function is called when one of the observed object has changed
+     *
+     * @param observable The observable that changed
+     * @param o          The object that will be used in order to update
+     */
     @Override
     public void update(Observable observable, Object o) {
         ArrayList<Song> songs = (ArrayList<Song>) o;
@@ -44,7 +64,7 @@ public class PlayListView extends JPanel implements Observer {
         this.jList = new JList<>(this.listModel);
         this.scrollPane = new JScrollPane(this.jList);
         this.add(this.scrollPane);
-        
+
         this.repaint();
         this.revalidate();
     }

@@ -12,18 +12,38 @@ import java.util.Observer;
  * Created by php on 06/07/16.
  */
 public class JukeBoxPanel implements Observer {
+
+    /**
+     * Singleton design pattern on the JukeBoxPanel
+     */
     private static JukeBoxPanel jukeBoxPanel = new JukeBoxPanel();
 
+    /**
+     * Represents the main panel of the user interface
+     */
     private JPanel mainPanel;
 
+    /**
+     * Default constructor of the class
+     */
     private JukeBoxPanel() {
         this.mainPanel = makePanel();
     }
 
+    /**
+     * Accessor on the singleton class
+     *
+     * @return Returns the running JukeBoxPanel
+     */
     public static JukeBoxPanel getJukeBoxPanel() {
         return jukeBoxPanel;
     }
 
+    /**
+     * This function builds the panel at the bottom that contains all the buttons
+     *
+     * @return Returns the bottom panel
+     */
     private JComponent makeBottomPanel() {
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
@@ -71,6 +91,11 @@ public class JukeBoxPanel implements Observer {
         return bottomPanel;
     }
 
+    /**
+     * This function builds the panel at the top that contains the menu
+     *
+     * @return Returns the top panel
+     */
     private JComponent makeTopPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
@@ -88,6 +113,11 @@ public class JukeBoxPanel implements Observer {
         return panel;
     }
 
+    /**
+     * This function builds the other panels and store them into the main panel
+     *
+     * @return Returns the main panel
+     */
     private JPanel makePanel() {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
@@ -100,11 +130,23 @@ public class JukeBoxPanel implements Observer {
         return mainPanel;
     }
 
+    /**
+     * This function will probably never be used.
+     * It updates the JukeBoxPanel when observables change
+     *
+     * @param observable The observable that changed
+     * @param o          The object that will be used in order to update panel
+     */
     @Override
     public void update(Observable observable, Object o) {
 
     }
 
+    /**
+     * Accessor on the main panel
+     *
+     * @return Returns the main panel attribute
+     */
     public JPanel getMainPanel() {
         return mainPanel;
     }

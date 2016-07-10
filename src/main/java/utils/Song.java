@@ -27,6 +27,11 @@ public class Song {
         this.file = new File(filename);
     }
 
+    /**
+     * Alternate constructor of the class
+     *
+     * @param file The file that will be loaded
+     */
     public Song(File file) {
         this.file = file;
         this.path = file.getPath();
